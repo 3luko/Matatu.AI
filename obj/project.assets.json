@@ -8,19 +8,19 @@
     "net8.0": []
   },
   "packageFolders": {
-    "C:\\Users\\vluka\\.nuget\\packages\\": {}
+    "C:\\Users\\Luko\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\vluka\\OneDrive\\Desktop\\MatatuC#\\MatatuC#.csproj",
+      "projectUniqueName": "C:\\Users\\Luko\\OneDrive - University of St. Thomas\\Desktop\\Coding Projects\\MatatuCSharp\\MatatuC#.csproj",
       "projectName": "MatatuC#",
-      "projectPath": "C:\\Users\\vluka\\OneDrive\\Desktop\\MatatuC#\\MatatuC#.csproj",
-      "packagesPath": "C:\\Users\\vluka\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\vluka\\OneDrive\\Desktop\\MatatuC#\\obj\\",
+      "projectPath": "C:\\Users\\Luko\\OneDrive - University of St. Thomas\\Desktop\\Coding Projects\\MatatuCSharp\\MatatuC#.csproj",
+      "packagesPath": "C:\\Users\\Luko\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Luko\\OneDrive - University of St. Thomas\\Desktop\\Coding Projects\\MatatuCSharp\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\vluka\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\Luko\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
@@ -43,7 +43,8 @@
         "enableAudit": "true",
         "auditLevel": "low",
         "auditMode": "direct"
-      }
+      },
+      "SdkAnalysisLevel": "9.0.300"
     },
     "frameworks": {
       "net8.0": {
@@ -64,7 +65,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.301/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.305/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

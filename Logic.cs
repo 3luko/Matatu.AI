@@ -13,153 +13,153 @@ namespace MatatuCSharp
         //play an Ace value. The computer will check their 
         //own hand and see which card will be suitable 
         //for them to win the game.
-        public static string compSuitChoice(Player computer){
-            if(!Logic.ace_Value()){
-                return "No Ace value";
-            }
-            string compSuit = "";
-            //initialize a dictionary where each suit is the key and the value is the amount of cards 
-            var suitCounts = new Dictionary<Suit, int>{
-                {Suit.Hearts, 0},
-                {Suit.Spades, 0},
-                {Suit.Clubs, 0},
-                {Suit.Diamonds,0}
-            };
+        // public static string compSuitChoice(Player computer){
+        //     if(!Logic.ace_Value()){
+        //         return "No Ace value";
+        //     }
+        //     string compSuit = "";
+        //     //initialize a dictionary where each suit is the key and the value is the amount of cards 
+        //     var suitCounts = new Dictionary<Suit, int>{
+        //         {Suit.Hearts, 0},
+        //         {Suit.Spades, 0},
+        //         {Suit.Clubs, 0},
+        //         {Suit.Diamonds,0}
+        //     };
 
-            foreach(Card card in computer.SeeCards){
-                suitCounts[card.CardSuit]++;
-            }
-            //using the Aggregate method to determine which suit has the highest counts
-            Suit chosenSuit = suitCounts.Aggregate((l, r) => l.Value > r.Value ? l : r).Key; 
+        //     foreach(Card card in computer.SeeCards){
+        //         suitCounts[card.CardSuit]++;
+        //     }
+        //     //using the Aggregate method to determine which suit has the highest counts
+        //     Suit chosenSuit = suitCounts.Aggregate((l, r) => l.Value > r.Value ? l : r).Key; 
 
-            if(chosenSuit == Suit.Hearts){
-                compSuit = "Hearts";
-            } else if(chosenSuit == Suit.Spades){
-                compSuit = "Spades";
-            } else if(chosenSuit == Suit.Clubs){
-                compSuit = "Clubs";
-            } else if(chosenSuit == Suit.Diamonds){
-                compSuit = "Diamonds";
-            }
+        //     if(chosenSuit == Suit.Hearts){
+        //         compSuit = "Hearts";
+        //     } else if(chosenSuit == Suit.Spades){
+        //         compSuit = "Spades";
+        //     } else if(chosenSuit == Suit.Clubs){
+        //         compSuit = "Clubs";
+        //     } else if(chosenSuit == Suit.Diamonds){
+        //         compSuit = "Diamonds";
+        //     }
 
-            return compSuit;
-        }
+        //     return compSuit;
+        // }
         //methdo to make the computer pick a card in
         //their deck to play. Returns True if they
         //can play, and plays that card. Returns False 
         //if they can't play and draws a card
-        public static bool computerChoice(Card topCard, Player computer){
-            bool suit = false;
-            bool value = false;
-            int idx = 0;
+        // public static bool computerChoice(Card topCard, Player computer){
+        //     bool suit = false;
+        //     bool value = false;
+        //     int idx = 0;
             
-            foreach(Card card in computer.SeeCards){
-                if(card.CardSuit == topCard.CardSuit){
-                    suit = true;
-                }
-                if(card.CardValue == topCard.CardValue){
-                    value = true;
-                }
-                if(suit || value){
-                    break;
-                }
-                idx++;
-            }
-            if(suit || value){
-                idx++;
-                computer.playCard(idx);
-                return true;
-            } else {
-                computer.drawCard();
-                return false;
-            }
-        }
+        //     foreach(Card card in computer.SeeCards){
+        //         if(card.CardSuit == topCard.CardSuit){
+        //             suit = true;
+        //         }
+        //         if(card.CardValue == topCard.CardValue){
+        //             value = true;
+        //         }
+        //         if(suit || value){
+        //             break;
+        //         }
+        //         idx++;
+        //     }
+        //     if(suit || value){
+        //         idx++;
+        //         computer.playCard(idx);
+        //         return true;
+        //     } else {
+        //         computer.drawCard();
+        //         return false;
+        //     }
+        // }
 
         //method that makes sure the computer plays whatever card
         //that you chose in as the suit after playing an ace
         //it automatically checks it's deck and 
 
-        public static bool computerChoiceACE(Player computer, String suit){
-            bool suits = false;
-            int idx = 0;
+        // public static bool computerChoiceACE(Player computer, String suit){
+        //     bool suits = false;
+        //     int idx = 0;
 
-            if(suit == "h" || suit == "H"){//if the string inputed is an h meaning they want hearts
-                foreach (Card card in computer.SeeCards)//checks each card in the computers deck
-                {
-                    if(card.CardSuit == Suit.Hearts){ //if it finds the card it will break loop
-                        suits = true;
-                        idx++;
-                        break;
-                    }
-                    idx++;
-                }
-                if(suits){ //it will play that card and return true;
-                    computer.playCard(idx);
-                    return true;
-                } else { //if suits is false it will just draw a card
-                    computer.drawCard();
-                    return false;
-                }
+        //     if(suit == "h" || suit == "H"){//if the string inputed is an h meaning they want hearts
+        //         foreach (Card card in computer.SeeCards)//checks each card in the computers deck
+        //         {
+        //             if(card.CardSuit == Suit.Hearts){ //if it finds the card it will break loop
+        //                 suits = true;
+        //                 idx++;
+        //                 break;
+        //             }
+        //             idx++;
+        //         }
+        //         if(suits){ //it will play that card and return true;
+        //             computer.playCard(idx);
+        //             return true;
+        //         } else { //if suits is false it will just draw a card
+        //             computer.drawCard();
+        //             return false;
+        //         }
 
-            } else if(suit == "c" || suit == "C"){ //does the same for if it is a club
-                foreach (Card card in computer.SeeCards)
-                {
-                    if(card.CardSuit == Suit.Clubs){
-                        suits = true;
-                        idx++;
-                        break;
-                    }
-                    idx++;
-                }
-                if(suits){
-                    computer.playCard(idx);
-                    return true;
-                } else {
-                    computer.drawCard();
-                    return false;
-                }
+        //     } else if(suit == "c" || suit == "C"){ //does the same for if it is a club
+        //         foreach (Card card in computer.SeeCards)
+        //         {
+        //             if(card.CardSuit == Suit.Clubs){
+        //                 suits = true;
+        //                 idx++;
+        //                 break;
+        //             }
+        //             idx++;
+        //         }
+        //         if(suits){
+        //             computer.playCard(idx);
+        //             return true;
+        //         } else {
+        //             computer.drawCard();
+        //             return false;
+        //         }
 
-            } else if(suit == "s" || suit == "S"){ //if the suit is a spade
-                foreach (Card card in computer.SeeCards)
-                {
-                    if(card.CardSuit == Suit.Spades){
-                        suits = true;
-                        idx++;
-                        break;
-                    }
-                    idx++;
-                }
-                if(suits){
-                    computer.playCard(idx);
-                    return true;
-                } else {
-                    computer.drawCard();
-                    return false;
-                }
+        //     } else if(suit == "s" || suit == "S"){ //if the suit is a spade
+        //         foreach (Card card in computer.SeeCards)
+        //         {
+        //             if(card.CardSuit == Suit.Spades){
+        //                 suits = true;
+        //                 idx++;
+        //                 break;
+        //             }
+        //             idx++;
+        //         }
+        //         if(suits){
+        //             computer.playCard(idx);
+        //             return true;
+        //         } else {
+        //             computer.drawCard();
+        //             return false;
+        //         }
                 
-            } else if(suit == "d" || suit == "D"){ //if the suit is a diamond
-                foreach (Card card in computer.SeeCards)
-                {
-                    if(card.CardSuit == Suit.Diamonds){
-                        suits = true;
-                        idx++;
-                        break;
-                    }
-                    idx++;
-                }
-                if(suits){
-                    computer.playCard(idx);
-                    return true;
-                } else {
-                    computer.drawCard();
-                    return false;
-                }
+        //     } else if(suit == "d" || suit == "D"){ //if the suit is a diamond
+        //         foreach (Card card in computer.SeeCards)
+        //         {
+        //             if(card.CardSuit == Suit.Diamonds){
+        //                 suits = true;
+        //                 idx++;
+        //                 break;
+        //             }
+        //             idx++;
+        //         }
+        //         if(suits){
+        //             computer.playCard(idx);
+        //             return true;
+        //         } else {
+        //             computer.drawCard();
+        //             return false;
+        //         }
 
-            } else {
-                Console.WriteLine("Invalid suit entered. The computer will play as the Ace's Suit.");
-                return false;
-            }
-        }
+        //     } else {
+        //         Console.WriteLine("Invalid suit entered. The computer will play as the Ace's Suit.");
+        //         return false;
+        //     }
+        // }
 
 
 

@@ -13,3 +13,11 @@ C:\Users\vluka\OneDrive\Desktop\MatatuC#\obj\Debug\net8.0\MatatuC#.pdb
 C:\Users\vluka\OneDrive\Desktop\MatatuC#\obj\Debug\net8.0\MatatuC#.genruntimeconfig.cache
 C:\Users\vluka\OneDrive\Desktop\MatatuC#\obj\Debug\net8.0\ref\MatatuC#.dll
 C:\Users\vluka\OneDrive\Desktop\MatatuC#\obj\Debug\net8.0\MatatuC#.sourcelink.json
+c:\Users\Luko\OneDrive - University of St. Thomas\Desktop\Coding Projects\MatatuCSharp\obj\Debug\net8.0\MatatuC#.GeneratedMSBuildEditorConfig.editorconfig
+c:\Users\Luko\OneDrive - University of St. Thomas\Desktop\Coding Projects\MatatuCSharp\obj\Debug\net8.0\MatatuC#.AssemblyInfoInputs.cache
+c:\Users\Luko\OneDrive - University of St. Thomas\Desktop\Coding Projects\MatatuCSharp\obj\Debug\net8.0\MatatuC#.AssemblyInfo.cs
+c:\Users\Luko\OneDrive - University of St. Thomas\Desktop\Coding Projects\MatatuCSharp\obj\Debug\net8.0\MatatuC#.csproj.CoreCompileInputs.cache
+c:\Users\Luko\OneDrive - University of St. Thomas\Desktop\Coding Projects\MatatuCSharp\obj\Debug\net8.0\MatatuC#.sourcelink.json
+c:\Users\Luko\OneDrive - University of St. Thomas\Desktop\Coding Projects\MatatuCSharp\obj\Debug\net8.0\MatatuC#.dll
+c:\Users\Luko\OneDrive - University of St. Thomas\Desktop\Coding Projects\MatatuCSharp\obj\Debug\net8.0\refint\MatatuC#.dll
+c:\Users\Luko\OneDrive - University of St. Thomas\Desktop\Coding Projects\MatatuCSharp\obj\Debug\net8.0\MatatuC#.pdb
