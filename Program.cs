@@ -1,209 +1,202 @@
-﻿using System;
-using System.Runtime.CompilerServices;
+using System;
 
-namespace MatatuCSharp{
-    public class Program{
-        static void Main(string[] args){           
-            //MENU
-            bool startGame = true;
+namespace MatatuCSharp
+{
+    public class Program
+    {
+        static void Main(string[] args)
+        {
             bool playerPicked = false;
             bool stop = false;
-            bool is_Eight_Jack = false;
-            bool is_Ace = false;
+            bool isEightJack = false;
+            bool isAce = false;
             bool gameEnded = false;
-            bool playAceCard = false;
-            string userChoice;
             string suit = "";
             string suit2 = "";
             Card firstCard = null;
- 
-            
+
             Console.WriteLine("Welcome to Matatu!!\n");
             Console.Write("Press (1) to START GAME OR (Enter) to EXIT.");
-            string play = Console.ReadLine();
-            if(play == "1"){
-                Console.WriteLine("Shuffling deck...\n");
-            } else {
+           
+            // User doesn't want to play
+            if (Console.ReadLine() != "1")
+            {
                 Console.WriteLine("Bye!");
-                startGame = false;
+                return;
             }
 
+            Console.WriteLine("Shuffling deck...\n");
             Deck myDeck = new Deck();
             myDeck.shuffleDeck();
             Player player = null;
             Player computer = null;
-            if(startGame){
+            MatatuAI ai = null;
 
-                //player has to pick 4 cards from deck
-                
-                while(!playerPicked){ //while playerPicked is equal to false it will continue the loop
-                    Console.WriteLine("Please select (P) to automatically pick 4 cards. Select (S) to end game.");
-                    string playerPick = Console.ReadLine();
-                
-                    if(playerPick == "P" || playerPick == "p"){ //if the player presses p it will pick 4 cards and 
-                        playerPicked = true;
-                        player = new Player(myDeck);
-                        computer = new Player(myDeck);
-                        Player.showCards(player);
-                        firstCard = Player.firstCard(myDeck);
-                    } else if (playerPick == "S" || playerPick == "s"){ // ends the game
-                        startGame = false;
-                        playerPicked = true;
-                        Console.WriteLine("Thanks for playing!");
-                    }
-                }              
+            // Player picks 4 cards 
+            while (!playerPicked)
+            {
+                Console.WriteLine("Please select (P) to automatically pick 4 cards. Select (S) to end game.");
+                string playerPick = Console.ReadLine();
+                if (playerPick == "P" || playerPick == "p")
+                {
+                    playerPicked = true;
+                    player = new Player(myDeck);
+                    computer = new Player(myDeck);
+                    ai = new MatatuAI(computer);
+                    Player.showCards(player);
+                    firstCard = Player.firstCard(myDeck);
+                }
+                else if (playerPick == "S" || playerPick == "s")
+                {
+                    Console.WriteLine("Thanks for playing!");
+                    return;
+                }
             }
-            while(player.cardInHandAmount() > 0 && computer.cardInHandAmount() > 0){
+
+            // Until someone runs out of cards the game will continue
+            while (player.cardInHandAmount() > 0 && computer.cardInHandAmount() > 0)
+            {
                 Console.WriteLine("\n******************************************");
-                    
-                if(!is_Eight_Jack){ //if they put an eight or jack it will skip the users turn
+
+                if (!isEightJack)
+                {
                     Console.WriteLine("\nTop of Deck: " + Player.TopWastedDeck);
                     Console.WriteLine("\nPlease PLAY a card (1-" + player.cardInHandAmount() + "), (P) to pick a card, or (S) to STOP");
                     string playerCard = Console.ReadLine();
-                    if(playerCard == "S" || playerCard == "s"){ //if the input is an S it will terminate the game
+
+                    if (playerCard == "S" || playerCard == "s")
+                    {
                         Console.WriteLine("Thanks for playing!");
                         stop = true;
                         break;
-                    } else if(playerCard == "P" || playerCard == "p"){
+                    }
+
+                    if (playerCard == "P" || playerCard == "p")
+                    {
                         Card yourPick = player.drawCard();
-                        Console.WriteLine($"You picked a(n) {yourPick} from the deck");
-                        if(Logic.canYouPlay(yourPick, Player.TopWastedDeck)){ //if the card that was picked is playable it will
-                            Console.WriteLine("This card is playable would you like to play? (Select [y] for yes, or any other key for no.)");
-                            userChoice = Console.ReadLine();
-                            if(userChoice == "y" || userChoice == "Y"){
+                        Console.WriteLine("You picked a(n) " + yourPick + " from the deck");
+                        if (Logic.canYouPlay(yourPick, Player.TopWastedDeck))
+                        {
+                            Console.WriteLine("This card is playable. Play it? (Y/N)");
+                            string drawChoice = Console.ReadLine();
+                            if (drawChoice == "y" || drawChoice == "Y")
+                            {
                                 player.playCard(player.cardInHandAmount());
-                                if(Logic.jack_and_eight(Player.TopWastedDeck)){ //still checks if value placed was an 8 or Jack
-                                    Console.WriteLine("The computer has been skipped!");
-                                    Player.showCards(player);
-                                    continue;
-                                } else if(Logic.two_Value(computer)){ //checks if the computer played a value of 2
-                                    Console.WriteLine("The computer drew 2 cards");
-                                    Player.showCards(player);
-                                }
                                 Console.WriteLine("You played: " + Player.TopWastedDeck);
-                            } else {
-                                Console.WriteLine("You decided to keep the card. Interesting...");
                             }
-                            }
-                    } else { //if the user inserts a number it will check if the number is valid and play that card
-                        int card2Play = int.Parse(playerCard);
-                        if(card2Play > player.cardInHandAmount() || card2Play < 1){ //if the user inputs a card that isn't valid it will continue the loop asking them to play again.
+                        }
+                    }
+                    else
+                    {
+                        if (!int.TryParse(playerCard, out int cardToPlay) || cardToPlay < 1 || cardToPlay > player.cardInHandAmount())
+                        {
                             Console.WriteLine("Please put a valid card number");
                             continue;
                         }
-                        if(Logic.seven_Val(firstCard)){
+
+                        if (Logic.seven_Val(firstCard))
+                        {
                             Console.WriteLine("You ended the game!");
                             gameEnded = true;
                             break;
                         }
-                        if(is_Ace){ //checking if the top card ia an ace they can't pick any card other than that same suit value
-                            if(!Logic.playAce(player.chooseCard(card2Play), suit2)){
+
+                        Card selectedCard = player.chooseCard(cardToPlay);
+                        if (isAce)
+                        {
+                            if (!Logic.playAce(selectedCard, suit2))
+                            {
                                 Console.WriteLine("You can't place that, you must put a " + suit2 + " card");
-                                Player.showCards(player);
                                 continue;
-                            } else {
-                                is_Ace = false;
                             }
-                        } else if(!Logic.canYouPlay(player.chooseCard(card2Play), Player.TopWastedDeck)){ //if that card doesn't follow the rules of the game it will make you play again until it does
-                            Console.WriteLine("You can't place that, you must put either a " + Player.TopWastedDeck.CardSuit + " Suit or a value of " + Player.TopWastedDeck.CardValue);
+                            isAce = false;
+                        }
+                        else if (!Logic.canYouPlay(selectedCard, Player.TopWastedDeck))
+                        {
+                            Console.WriteLine("You can't place that card");
                             continue;
-                        } 
-                        player.playCard(card2Play); //actually cplaying a card
+                        }
+
+                        player.playCard(cardToPlay);
                         Console.WriteLine("You played a(n) " + Player.TopWastedDeck);
-                        if(Logic.ace_Value()){ //checking if the value at the top of the deck is an Ace value
-                            is_Ace = true; 
-                            while(suit != "h" && suit != "c" && suit != "s" && suit != "d"){
-                                Console.WriteLine("What suit would you like? (H) for Heart, (C) for Clubs, (S) Spades, and (D) Diamonds");
+                        if (Logic.ace_Value())
+                        {
+                            isAce = true;
+                            suit = "";
+                            while (suit != "h" && suit != "c" && suit != "s" && suit != "d")
+                            {
+                                Console.WriteLine("What suit would you like? (H), (C), (S), or (D)");
                                 suit = Console.ReadLine().ToLower();
-                                if(suit == "h"){
-                                    suit2 = "Hearts";
-                                } else if(suit == "s"){
-                                    suit2 = "Spades";
-                                } else if(suit == "c"){
-                                    suit2 = "Clubs";
-                                } else if(suit == "d"){
-                                    suit2 = "Diamonds";
-                                } else {
-                                    Console.WriteLine("Please input either an (S) for spades, (H) for Hearts, (C) for Clubs, (D) for Diamonds.");
-                                }
+                                suit2 = suit == "h" ? "Hearts" : suit == "s" ? "Spades" : suit == "c" ? "Clubs" : suit == "d" ? "Diamonds" : "";
                             }
-                         } else if(Logic.jack_and_eight(Player.TopWastedDeck)){
+                        }
+                        else if (Logic.jack_and_eight(Player.TopWastedDeck))
+                        {
                             Console.WriteLine("The computer has been skipped!");
-                            Player.showCards(player);
                             continue;
-                        } else if(Logic.two_Value(computer)){ //checks if the computer played a value of 2
+                        }
+                        else if (Logic.two_Value(computer))
+                        {
                             Console.WriteLine("The computer drew 2 cards");
-                            Player.showCards(player);
                             continue;
-                        } 
+                        }
                     }
                 }
-                if(player.cardInHandAmount() == 0){ //if the user has no cards left it will break out of the loop and show results
+
+                if (player.cardInHandAmount() == 0)
+                {
                     break;
                 }
-                is_Eight_Jack = false;
-                if(is_Ace){ //if the top of the deck is an ace the computer must play accordingly
-                    if(Logic.computerChoiceACE(computer, suit)){
-                        Console.WriteLine("\nThe Computer played: " + Player.TopWastedDeck);
-                        Console.WriteLine("The computer has " + computer.cardInHandAmount() + " left in hand");
-                        is_Ace = false;
-                        if(Logic.seven_Val(firstCard)){
-                            Console.WriteLine("The Computer ended the game!");
-                            gameEnded = true;
-                            break;
-                        } else if (Logic.jack_and_eight(Player.TopWastedDeck)){
-                            is_Eight_Jack = true;
-                            Console.WriteLine("You have been skipped");  
-                        } else if(Logic.two_Value(player)){
-                            is_Eight_Jack = true;
-                            Console.WriteLine("You must draw 2 cards :(");
-                        } else {
-                            Player.showCards(player);
-                        }
-                    } else { 
-                        Console.WriteLine("\nThe Computer Drew a card. The top of the deck is still: \n" + Player.TopWastedDeck);
-                        Console.WriteLine("You must play a " + suit2 + " card.");
-                    }
-                } else if(Logic.computerChoice(Player.TopWastedDeck, computer)){ //makes the computer play a card or draw a card based on their in hand, and what's on top of the deck
+
+                isEightJack = false;
+                AIAction action = ai.ChooseAction(isAce ? suit2 : "");
+                if (action.ActionType == AIActionType.DrawCard)
+                {
+                    computer.drawCard();
+                    Console.WriteLine("\nThe Computer Drew a card. The top of the deck is still: \n" + Player.TopWastedDeck);
+                }
+                else
+                {
+                    computer.playCard(action.CardIndex + 1);
                     Console.WriteLine("\nThe Computer played: " + Player.TopWastedDeck);
                     Console.WriteLine("The computer has " + computer.cardInHandAmount() + " left in hand");
-                    if(Logic.ace_Value()){ //if the computer plays an ace
-                        string compSuit = Logic.compSuitChoice(computer);
-                        Console.WriteLine("The Computer chose a " + compSuit + ".");
-                        suit2 = compSuit;
-                        is_Ace = true;
+
+                    if (Player.TopWastedDeck.CardValue == Value.Ace)
+                    {
+                        suit2 = action.ChosenSuit;
+                        isAce = true;
+                        Console.WriteLine("The Computer chose a " + suit2 + ".");
                         continue;
-                    } else if(Logic.seven_Val(firstCard)){ //if the computer plays a seven
+                    }
+                    if (Logic.seven_Val(firstCard))
+                    {
                         Console.WriteLine("The Computer ended the game!");
                         gameEnded = true;
                         break;
-                    } else if(Logic.jack_and_eight(Player.TopWastedDeck)){ //if the computer plays an eight or a Jack
-                        is_Eight_Jack = true;
-                        Console.WriteLine("You have been skipped");   
-                    } else if(Logic.two_Value(player)){ //checks if the computer played a value of 2
-                        is_Eight_Jack = true;
-                        Console.WriteLine("You must draw 2 cards :(");
-                    } 
-                } else{ //the computer is picking a card from the deck 
-                    Card computerCard = computer.chooseCard(computer.cardInHandAmount());
-                    if(Logic.canYouPlay(computerCard, Player.TopWastedDeck)){ //checks if the computer can play the picked card
-                        computer.playCard(computer.cardInHandAmount());
-                        Console.WriteLine("The Computer picked and played a(n) " + Player.TopWastedDeck);
-                    }else {
-                        Console.WriteLine("\nThe Computer Drew a card. The top of the deck is still: \n" + Player.TopWastedDeck);
                     }
+                    if (Logic.jack_and_eight(Player.TopWastedDeck))
+                    {
+                        isEightJack = true;
+                        Console.WriteLine("You have been skipped");
+                    }
+                    else if (Logic.two_Value(player))
+                    {
+                        isEightJack = true;
+                        Console.WriteLine("You must draw 2 cards :(");
+                    }
+                    isAce = false;
                 }
                 Player.showCards(player);
-            } 
-            if(gameEnded){
+            }
+
+            if (gameEnded)
+            {
                 Logic.results(player, computer);
-            } else if(!stop){
-                if(player.cardInHandAmount() < 1){
-                    Console.WriteLine("You Won! You have no more cards left!  :)");
-                } else {
-                    Console.WriteLine("The Computer Won! :(");
-                }
-            }            
+            }
+            else if (!stop)
+            {
+                Console.WriteLine(player.cardInHandAmount() < 1 ? "You Won! You have no more cards left!  :)" : "The Computer Won! :(");
+            }
         }
-    }   
+    }
 }

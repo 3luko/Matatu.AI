@@ -21,3 +21,10 @@ c:\Users\Luko\OneDrive - University of St. Thomas\Desktop\Coding Projects\Matatu
 c:\Users\Luko\OneDrive - University of St. Thomas\Desktop\Coding Projects\MatatuCSharp\obj\Debug\net8.0\MatatuC#.dll
 c:\Users\Luko\OneDrive - University of St. Thomas\Desktop\Coding Projects\MatatuCSharp\obj\Debug\net8.0\refint\MatatuC#.dll
 c:\Users\Luko\OneDrive - University of St. Thomas\Desktop\Coding Projects\MatatuCSharp\obj\Debug\net8.0\MatatuC#.pdb
+C:\Users\Luko\OneDrive - University of St. Thomas\Desktop\Coding Projects\MatatuCSharp\bin\Debug\net8.0\MatatuC#.exe
+C:\Users\Luko\OneDrive - University of St. Thomas\Desktop\Coding Projects\MatatuCSharp\bin\Debug\net8.0\MatatuC#.deps.json
+C:\Users\Luko\OneDrive - University of St. Thomas\Desktop\Coding Projects\MatatuCSharp\bin\Debug\net8.0\MatatuC#.runtimeconfig.json
+C:\Users\Luko\OneDrive - University of St. Thomas\Desktop\Coding Projects\MatatuCSharp\bin\Debug\net8.0\MatatuC#.dll
+C:\Users\Luko\OneDrive - University of St. Thomas\Desktop\Coding Projects\MatatuCSharp\bin\Debug\net8.0\MatatuC#.pdb
+C:\Users\Luko\OneDrive - University of St. Thomas\Desktop\Coding Projects\MatatuCSharp\obj\Debug\net8.0\MatatuC#.genruntimeconfig.cache
+C:\Users\Luko\OneDrive - University of St. Thomas\Desktop\Coding Projects\MatatuCSharp\obj\Debug\net8.0\ref\MatatuC#.dll

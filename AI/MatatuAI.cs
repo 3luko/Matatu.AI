@@ -9,9 +9,9 @@ namespace MatatuCSharp
             this.computer = computer;
         }
 
-        public AIAction ChooseAction()
+        public AIAction ChooseAction(string requiredSuit = "")
         {
-            int bestCardIndex = FindBestCard();
+            int bestCardIndex = FindBestCard(requiredSuit);
 
             if (bestCardIndex == -1)
             {
@@ -105,7 +105,7 @@ namespace MatatuCSharp
             return score;
         }
 
-        private int FindBestCard()
+        private int FindBestCard(string requiredSuit)
         {
             int bestIndex = -1;
             int bestScore = int.MinValue;
@@ -119,7 +119,11 @@ namespace MatatuCSharp
 
                 // If the current card index you can play than we'll
                 // evaluate that card
-                if (Logic.canYouPlay(card, topCard))
+                bool canPlay = requiredSuit == ""
+                    ? Logic.canYouPlay(card, topCard)
+                    : Logic.playAce(card, requiredSuit);
+
+                if (canPlay)
                 {
                     int score = EvaluateCard(card);
 
@@ -133,9 +137,6 @@ namespace MatatuCSharp
 
             return bestIndex;
         }
-
-        // method for when it's the computer's turn to play
-        // an Ace
 
     }
 }

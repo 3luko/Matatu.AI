@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "c:\\Users\\Luko\\OneDrive - University of St. Thomas\\Desktop\\Coding Projects\\MatatuCSharp\\MatatuC#.csproj": {}
+    "C:\\Users\\Luko\\OneDrive - University of St. Thomas\\Desktop\\Coding Projects\\MatatuCSharp\\MatatuC#.csproj": {}
   },
   "projects": {
-    "c:\\Users\\Luko\\OneDrive - University of St. Thomas\\Desktop\\Coding Projects\\MatatuCSharp\\MatatuC#.csproj": {
+    "C:\\Users\\Luko\\OneDrive - University of St. Thomas\\Desktop\\Coding Projects\\MatatuCSharp\\MatatuC#.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Users\\Luko\\OneDrive - University of St. Thomas\\Desktop\\Coding Projects\\MatatuCSharp\\MatatuC#.csproj",
+        "projectUniqueName": "C:\\Users\\Luko\\OneDrive - University of St. Thomas\\Desktop\\Coding Projects\\MatatuCSharp\\MatatuC#.csproj",
         "projectName": "MatatuC#",
-        "projectPath": "c:\\Users\\Luko\\OneDrive - University of St. Thomas\\Desktop\\Coding Projects\\MatatuCSharp\\MatatuC#.csproj",
+        "projectPath": "C:\\Users\\Luko\\OneDrive - University of St. Thomas\\Desktop\\Coding Projects\\MatatuCSharp\\MatatuC#.csproj",
         "packagesPath": "C:\\Users\\Luko\\.nuget\\packages\\",
-        "outputPath": "c:\\Users\\Luko\\OneDrive - University of St. Thomas\\Desktop\\Coding Projects\\MatatuCSharp\\obj\\",
+        "outputPath": "C:\\Users\\Luko\\OneDrive - University of St. Thomas\\Desktop\\Coding Projects\\MatatuCSharp\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Luko\\AppData\\Roaming\\NuGet\\NuGet.Config"
