@@ -13,6 +13,5 @@ namespace MatatuCSharp
         public int CardIndex { get; set; }
 
         public string ChosenSuit { get; set; }
-
     }
 }

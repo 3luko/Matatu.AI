@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MatatuC#")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+043efec8bc0e459830f5fa973ce22a40d81ddd7c")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+07ac9dd256d86b9146724c9b4854b511749dc992")]
 [assembly: System.Reflection.AssemblyProductAttribute("MatatuC#")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MatatuC#")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

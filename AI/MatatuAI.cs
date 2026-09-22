@@ -137,6 +137,5 @@ namespace MatatuCSharp
 
             return bestIndex;
         }
-
     }
 }
