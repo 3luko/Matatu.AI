@@ -13,7 +13,7 @@ namespace MatatuCSharp
             deckOfCards = myDeck.Cards;
             wastedDeck = new List<Card>();
             cardsInHand = new List<Card>();
-            for(int i = 0; i < 4; i++){
+            for(int i = 0; i < 5; i++){
                 drawCard();
             }
         }

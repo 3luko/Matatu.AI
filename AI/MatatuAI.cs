@@ -1,6 +1,6 @@
 namespace MatatuCSharp
 {
-    public class MatatuAI
+    public class MatatuAI : IPlayerAgent
     {
         private Player computer;
 
@@ -9,9 +9,12 @@ namespace MatatuCSharp
             this.computer = computer;
         }
 
-        public AIAction ChooseAction(string requiredSuit = "")
+        public AIAction ChooseAction(GameState gameState)
         {
-            int bestCardIndex = FindBestCard(requiredSuit);
+            int bestCardIndex = FindBestCard(
+                gameState.RequiredSuit,
+                gameState.TopCard
+            );
 
             if (bestCardIndex == -1)
             {
@@ -105,12 +108,10 @@ namespace MatatuCSharp
             return score;
         }
 
-        private int FindBestCard(string requiredSuit)
+        private int FindBestCard(string requiredSuit, Card topCard)
         {
             int bestIndex = -1;
             int bestScore = int.MinValue;
-
-            Card topCard = Player.TopWastedDeck;
 
             // Looping through each of the cards
             for (int i = 0; i < computer.SeeCards.Count; i++)

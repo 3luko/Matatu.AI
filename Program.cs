@@ -6,6 +6,11 @@ namespace MatatuCSharp
     {
         static void Main(string[] args)
         {
+            SimulationEvaluator evaluator = new SimulationEvaluator();
+
+            evaluator.RunEvaluation(1000);
+            return;
+
             bool playerPicked = false;
             bool stop = false;
             bool isEightJack = false;
@@ -30,7 +35,7 @@ namespace MatatuCSharp
             myDeck.shuffleDeck();
             Player player = null;
             Player computer = null;
-            MatatuAI ai = null;
+            IPlayerAgent ai = null;
 
             // Set up both hands and reveal the first discard card.
             while (!playerPicked)
@@ -43,7 +48,6 @@ namespace MatatuCSharp
                     player = new Player(myDeck);
                     computer = new Player(myDeck);
                     ai = new MatatuAI(computer);
-                    Player.showCards(player);
                     firstCard = Player.firstCard(myDeck);
                 }
                 else if (playerPick == "S" || playerPick == "s")
@@ -61,8 +65,8 @@ namespace MatatuCSharp
                 // Let the human player play, draw, or stop the game.
                 if (!isEightJack)
                 {
-                    Console.WriteLine("\nTop of Deck: " + Player.TopWastedDeck);
                     Player.showCards(player);
+                    Console.WriteLine("\nTop of Deck: " + Player.TopWastedDeck);
                     Console.WriteLine("\nPlease PLAY a card (1-" + player.cardInHandAmount() + "), (P) to pick a card, or (S) to STOP");
                     string playerCard = Console.ReadLine();
 
@@ -85,6 +89,7 @@ namespace MatatuCSharp
                             {
                                 player.playCard(player.cardInHandAmount());
                                 Console.WriteLine("You played: " + Player.TopWastedDeck);
+                                continue;
                             }
                         }
                     }
@@ -152,8 +157,15 @@ namespace MatatuCSharp
 
                 isEightJack = false;
 
-                // The computer chooses its move using the current game state.
-                AIAction action = ai.ChooseAction(isAce ? suit2 : "");
+                // Getting the current game state related to the top card and the required suit
+                GameState gameState = new GameState
+                {
+                    RequiredSuit = isAce ? suit2: "",
+                    TopCard = Player.TopWastedDeck
+                };
+
+                AIAction action = ai.ChooseAction(gameState);
+
                 if (action.ActionType == AIActionType.DrawCard)
                 {
                     computer.drawCard();
@@ -161,6 +173,7 @@ namespace MatatuCSharp
                 }
                 else
                 {
+                    System.Threading.Thread.Sleep(2000);
                     computer.playCard(action.CardIndex + 1);
                     Console.WriteLine("\nThe Computer played: " + Player.TopWastedDeck);
                     Console.WriteLine("The computer has " + computer.cardInHandAmount() + " left in hand");
@@ -190,7 +203,6 @@ namespace MatatuCSharp
                     }
                     isAce = false;
                 }
-                Player.showCards(player);
             }
 
             // Show final scores when a seven ends the game; otherwise report the winner.
