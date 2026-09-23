@@ -226,7 +226,50 @@ The design emphasizes:
 
 The following UML diagram illustrates the primary classes and relationships in the application:
 
-![Matatu UML Diagram](images/MatatuC%23\(UNO\)%20UML.drawio%20\(1\).png)
+```mermaid
+classDiagram
+
+class Program {
+    +Main()
+    +StartGame()
+    +GameLoop()
+}
+
+class Logic {
+    +IsPlayable()
+    +ComputerPlay()
+    +EvaluateHand()
+    +CalculateScore()
+}
+
+class Player {
+    -List~Card~ hand
+    +DrawCard()
+    +PlayCard()
+}
+
+class Card {
+    -Suit suit
+    -Value value
+    -int score
+}
+
+class Deck {
+    -List~Card~ cards
+    +Shuffle()
+    +DrawCard()
+}
+
+Program --> Logic
+Program --> Player
+Program --> Deck
+
+Player --> Card
+Deck --> Card
+
+Logic --> Player
+Logic --> Card
+```
 
 ---
 
